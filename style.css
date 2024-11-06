@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oxanium:wght@200..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: calc(1em +0.5rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --White: hsl(0, 0%, 100%);
+  --Light--pink: hsl(275, 100%, 97%);
+  --Grayish--purple: hsl(292, 16%, 49%);
+  --Dark--purple: hsl(292, 42%, 14%);
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--Light--pink);
+  background-image: url(background-pattern-desktop.svg);
+  background-repeat: repeat-x;
+  background-position: top;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.box {
+  background-color: var(--White);
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: -5px -5px 15px 5px hsla(330, 52%, 74%, 0.416);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+  }
+}
+
+.questions {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  p {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+.questions p:hover {
+  color: hsl(292, 67%, 40%);
+}
+
+.line {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 1rem;
+}
+
+.answers {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: hsla(0, 0%, 0%, 0.509);
+  margin-top: 1.5rem;
+  max-width: 52ch;
+  animation: closeAnswer 1.5s forwards;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* When the answer is open, we use keyframes for smooth transition */
+.answers.open {
+  max-height: auto; /* Adjust this to your content height */
+  opacity: 1;
+  animation: openAnswer 1.5s forwards; /* Animation for opening */
+}
+
+/* Keyframes for opening the answer */
+@keyframes openAnswer {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  100% {
+    max-height: 500px; /* Adjust this value */
+    opacity: 1;
+  }
+}
+
+/* Keyframes for closing the answer */
+@keyframes closeAnswer {
+  0% {
+    max-height: auto; /* Ensure it's open before animation */
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+/* For the icon animations */
+.icon-open,
+.icon-closed {
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+  visibility: hidden; /* Initially hide icons */
+}
+
+/* Initially show the closed icon */
+.icon-open {
+  visibility: hidden;
+}
+
+.icon-closed {
+  visibility: visible;
+}
+
+/* When the open icon is shown, it has opacity 1 */
+.icon-open.show {
+  animation: fadeInOpenIcon 0.3s forwards; /* Fade in open icon */
+}
+
+.icon-closed.show {
+  animation: fadeInClosedIcon 0.3s forwards; /* Fade in closed icon */
+}
+
+/* Keyframe for showing the open icon */
+@keyframes fadeInOpenIcon {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Keyframe for showing the closed icon */
+@keyframes fadeInClosedIcon {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Keyframe for hiding the open icon */
+@keyframes fadeOutOpenIcon {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden; /* Hide the icon after fade */
+  }
+}
+
+/* Keyframe for hiding the closed icon */
+@keyframes fadeOutClosedIcon {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden; /* Hide the icon after fade */
+  }
+}
+
+@media (max-width: 600px) {
+  .questions {
+    gap: 3rem;
+  }
+
+  .questions p {
+    max-width: 30ch;
+  }
+
+  .answers {
+    max-width: 32ch;
+  }
+}
+
+@media (max-width: 460px) {
+  .box {
+    padding: 2rem;
+  }
+
+  .header h1 {
+    font-size: 3rem;
+  }
+
+  .questions {
+    gap: 2rem;
+  }
+
+  .questions p {
+    max-width: 23ch;
+  }
+
+  .answers {
+    max-width: 29ch;
+  }
+}
+@media (max-width: 400px) {
+  body {
+    background-image: url(background-pattern-mobile.svg);
+    background-repeat: repeat-x;
+    background-position: top;
+  }
+}
+@media (max-width: 360px) {
+  .questions {
+    gap: 0rem;
+  }
+  .answers {
+    max-width: 25ch;
+  }
+
+  #add svg {
+    width: 20px;
+    height: 21px;
+  }
+}
